@@ -1,0 +1,70 @@
+body{
+  margin: 0;
+}
+.ab-o-oa {
+  bottom: 0;
+  height: 430px;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 430px;
+}
+.ab-o-Jb {
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  background-color: rgba(0,0,0,.04);
+  height: 430px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 430px;
+}
+.Wa-sa-c.a-i-kd-ta-Zg {
+  -webkit-transform: rotate(20deg);
+  transform: rotate(20deg);
+  left: -webkit-calc(160px);
+  left: calc(160px);
+}
+.Wa-sa-c {
+  -webkit-transition: all .5s;
+  transition: all .5s;
+  left: 165px;
+  position: absolute;
+  top: 150px;
+}
+.a-i-kd-ta-Zg {
+  background: no-repeat url(http://img.start-here.cn/aux-0ffe4313f8b7667a4bf7df304b0fdf75.png) 0 -347px;
+  -webkit-background-size: 307px 472px;
+  background-size: 307px 472px;
+  width: 100px;
+  height: 125px;
+}
+.a-i-kd-a-Ab-Zg {
+  background: no-repeat url(http://img.start-here.cn/aux-0ffe4313f8b7667a4bf7df304b0fdf75.png) -101px 0;
+  -webkit-background-size: 307px 472px;
+  background-size: 307px 472px;
+  width: 100px;
+  height: 125px;
+}
+.Wa-ka-oa-r.Wa-ka-oa-Zk {
+  color: #909090;
+}
+.Wa-ka-oa-r {
+  bottom: 80px;
+  color: #fff;
+  height: 54px;
+  margin-bottom: auto;
+  margin-top: auto;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+}
+.Wa-ka-oa-qc-V {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+.Wa-ka-oa-qc-r {
+  font-size: 13px;
+}
