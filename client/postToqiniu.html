@@ -18,6 +18,7 @@
 </head>
 
 <body>
+  <textarea name="" id="" cols="30" rows="10"></textarea>
   <div class="ab-o-oa" aria-hidden="true">
     <div class="ab-o-Jb"></div>
     <div class="Wa-sa-c a-i-kd-ta-Zg Xc-ag-fa"></div>
@@ -29,9 +30,10 @@
   </div>
   <div id="content"></div>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script>
+  <!-- <script>
     window.addEventListener('paste', function (e) {
-      e.preventDefault();
+      // e.preventDefault();
+      console.log(e)
       
       const {clipboardData} = e;
       console.log(clipboardData.items)
@@ -100,7 +102,8 @@
         console.log(`粘贴在此处只支持截图工具截的图片或者网页中右键复制的图片请选择拖拽或者上传图片`);
       }
     });
-  </script>
+  </script> -->
+  <script type="module" src="index.js"></script>
 </body>
 
 </html>
