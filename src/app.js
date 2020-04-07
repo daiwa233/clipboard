@@ -1,17 +1,17 @@
 const express = require('express');
 const app = express();
-
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const router = require('./router');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
-const cookieMaxAge = 30 * 24 * 3600 * 1000;// 30天的毫秒数
-let limit = '10Mb'
+let cookieMaxAge = 30 * 24 * 3600 * 1000;// 30天的毫秒数
 const {
   mongoKey,
   sessionKey
 } = require('./key');
 
+app.use(cors({credentials: true, origin: true}));
 // 配置session以及将session持久化
 app.use(session({
   secret: sessionKey,
@@ -26,37 +26,39 @@ app.use(session({
   cookie: {
     secure: false, // 在生产环境下需要先配置false，否则不能设置session
     maxAge: cookieMaxAge,
-    sameSite: 'none' // 设置为none，避免Chrome中不能携带cookie跨域
+    sameSite: 'none', // 设置为none，避免Chrome中不能携带cookie跨域
   }
 }));
 
+// // 应用的一些初始化配置，比如图片上传的大小限制等
+// app.post('/config',(req, res, next) => {
+  
+// })
+// app.use((req, res, next) => {
+
+// })
+
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({
-  extended: false,
-  limit
+  extended: false
 }));
 
 // parse application/json
-app.use(bodyParser.json({limit}));
+app.use(bodyParser.json());
 
-// 应用的一些初始化配置，比如图片上传的大小限制
-// 如果要实现此功能，还是要保存到session中。。或者保存到前端。
-app.post('/config',(req, res, next) => {
-  
-})
+
 
 app.use(router);
 
 
 // 全局错误处理中间件
 app.use((err, req, res, next) => {
-  console.error(err); // 将错误写入process.stderr中
   // 占坑 收集错误日志
-  if (req.xhr) {
+  if (req.xhr && !res.headersSent) {
     res.status(500).send({ error: 'Something failed!' });
-  } else {
-    res.render('error', {error: err})
   }
+  // 交给express的缺省错误处理中间件
+  return next(err)
 })
 module.exports = app;
 
