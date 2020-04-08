@@ -47,7 +47,7 @@ module.exports = {
             zone, // 空间所在地区
             domain // 域名，用于返回上传后的图片的连接
           }
-          return res.json(success)
+          return res.json({...success, type})
         })
         .catch(err => {   
           // 出现错误
@@ -99,7 +99,7 @@ module.exports = {
   // 是否已经创建了存储空间
   isInitial(req, res) {
     if (req.session.data) {
-      return res.json(success)
+      return res.json({...success, type: req.session.data.type})
     } else {
       return res.json(notInitial)
     }
