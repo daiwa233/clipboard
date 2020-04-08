@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+      .wrapper{
+        display: flex;
+        position: relative;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        min-height: 300px;
+        max-width: 400px;
+        padding: 20px;
+        margin: 50px auto 0; 
+        box-shadow: 0 4px 8px 6px rgba(7,17,27,.06);
+      }
+      form{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-top: 25px;
+      }
+      .bg-danger{
+        padding: 10px;
+        font-size: 12px;
+      }
+      .center{
+        text-align: center;
+      }
+      .content-body{
+        padding-top: 50px;
+      }
+      .config-btn{
+        position: absolute;
+        right: 0;
+        top: 10px;
+      }
+      .config-btn span{
+        cursor: pointer;
+      }
+      .hightlight{
+        padding: .1rem .2rem;
+        background: rgba(27,31,35,.05);
+        color: #f47466;
+        word-wrap: break-word;
+        font-size: 16px;
+      }
+      .negative-margin{
+        margin-left: -80px;
+      }
+      #back{
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        cursor: pointer; 
+      }
+    </style>
+</head>
+
+<body>
+  <div id="app"></div>
+  </div>
+  <template id="home">
+    <div class="wrapper">
+      <div class="content">
+        <p class="negative-margin">选择一个要使用的云存储空间:</p>
+      <div id="zone-group">
+        <button class="btn btn-info btn-lg btn-block" data-type="qiniu">七牛云</button>
+      </div>
+    </div>
+  </template>
+  <template id="qiniu-info-view">
+    <div class="wrapper">
+      <div id="back" class="btn-link">
+        <span class="glyphicon glyphicon-menu-left"></span>
+        <span>返回</span>
+      </div>
+      <form id="init-post">
+        <p class="hidden bg-danger" id="message"></p>
+        <div class="form-group">
+          <label for="access">accessKey</label>
+          <input type="password" class="form-control" id="access" placeholder="accessKey">
+        </div>
+        <div class="form-group">
+          <label for="secret">secretKey</label>
+          <input type="password" class="form-control" id="secret" placeholder="secretKey">
+        </div>
+        <div class="form-group">
+          <label for="domain">域名</label>
+          <input type="text" class="form-control" id="domain" placeholder="域名">
+        </div>
+        <div class="form-group">
+          <label for="scope">空间名</label>
+          <input type="text" class="form-control" id="scope" placeholder="空间名">
+        </div>
+        <div class="form-group">
+          <label for="zone">空间所处地区</label>
+          <select class="form-control" id="zone">
+            <option>Zone_z0</option>
+            <option>Zone_z1</option>
+            <option>Zone_z2</option>
+            <option>Zone_na0</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary" id="submit">提交</button>
+      </form>
+    </div>
+  </template>
+  <template id="work-view">
+    <div class="wrapper">
+      <div class="content-body">
+        <p>当前使用的云存储空间是<span id="type" class="hightlight">七牛云</span></p>
+        <div class="center">
+          <button class="btn btn-primary" id="change-btn">修改</button>
+        </div>
+      </div>
+      <div class="config-btn">
+        <span class="btn btn-link" id="config-btn">设置</span>
+      </div>
+    </div>
+  </template>
+
+  <template id="config-view">
+    <div>
+      
+    </div>
+  </template>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script type="module" src="./popup_script_index.js"></script>
+</body>
+
+</html>
