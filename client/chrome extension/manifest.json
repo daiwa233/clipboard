@@ -1,0 +1,26 @@
+{
+	"manifest_version": 2,
+	"name": "clipboard",
+	"version": "0.0.1",
+
+	"description": "有道云markdown插件，支持粘贴图片上传到配置的云存储空间",
+	"icons": {
+		"16": "./assets/img/icon.png",	
+		"32": "./assets/img/icon.png",	
+		"48": "./assets/img/icon.png",	
+		"128": "./assets/img/icon.png"
+	},
+	"browser_action": {
+		"default_icon": "./assets/img/icon.png",	
+		"default_title": "clipboard",
+		"default_popup": "./assets/index.html"
+	},
+	"content_scripts": [ {
+		"js": ["./assets/js/axios.min.js", "./assets/js/content_scripts/content_script_vender.js"],
+		"matches": ["https://note.youdao.com/web/*", "http://note.youdao.com/web/*"]
+	 } ],
+	 "permissions": [
+		"http://*/",
+		"https://*/"
+  ]
+}

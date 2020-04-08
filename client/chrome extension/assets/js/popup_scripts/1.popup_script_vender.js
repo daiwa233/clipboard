@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[1],{2:function(t,e,n){"use strict";n.r(e),n.d(e,"init",(function(){return i}));var c=n(0);function i(){Object(c.d)("#zone-group").addEventListener("click",(function(t){const{target:e}=t;let n=e.getAttribute("data-type");Object(c.c)("chooseType",{detail:n})}))}}}]);
