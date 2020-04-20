@@ -7,7 +7,7 @@ import {
 } from '../util.js'
 
 let messageFlag = false;
-export function init() {
+export function QiniuInit() {
   const access = query('#access'),
     secret = query('#secret'),
     scope = query('#scope'),
@@ -44,7 +44,12 @@ export function init() {
       } else if (status == '402') {
         showMessage(messageEl, '缺少配置项')
       } else if (status == '200') {
-        console.log('123')
+        // 配置成功的话将一些配置项添加到localStorage
+        localStorage.setItem('clipboardData', {
+          AltText: 'image',
+          domain: domain.value,
+          iframeID: 'mdEditor'
+        });
         publish('toWork', {detail: type})
       } else {
         showMessage(messageEl, '配置项错误')
