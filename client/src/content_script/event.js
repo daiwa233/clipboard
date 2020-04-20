@@ -1,5 +1,5 @@
-import { query, generateFName, generateUrl, pasteEvent } from './util.js'
-import { iframeID } from './config.js'
+import { query, generateFName, generateMDUrl, pasteEvent } from './util.js'
+import { iframeID, uploadImpl } from './config.js'
 
 
 let mainEl;
@@ -20,7 +20,8 @@ function pasteHandler(e) {
 
   let isImg = types.some(item => item === 'Files'); 
   // 当type中存在files时，一定是图片，系统中的文件在粘贴板上获得不到
-  // 如果存在图片,则需要清除粘贴板中的data
+  // 如果存在图片,则需要清除粘贴板中的data或者阻止事件冒泡
+  // MDN中关于clearData方法表示不能清除文件，所以只能阻止冒泡，阻止向上传播
   if (isImg) {
     // 取消冒泡
     e.stopPropagation();
@@ -38,16 +39,19 @@ function pasteHandler(e) {
       
     }
     // 构造paste事件
-    pasteEvent(mainEl, generateUrl(Fname))
+    pasteEvent(mainEl, generateMDUrl(Fname))
+
     const uploadFile = new FormData();
     uploadFile.append('ImgBlob', file);
     uploadFile.append('Fname', Fname)
     // 上传图片
     axios
-    .post('http://localhost:3001/upload',uploadFile)
+    .post(`${uploadImpl}/upload`,uploadFile)
     .then(res => {
       const { data } = res;
       if (data.status !== 200) {
+        // 应该调用popup，弹出上传失败的原因
+        // todo 
         console.log('在上传过程中出现问题')
       }
     })
@@ -55,7 +59,6 @@ function pasteHandler(e) {
       console.log(err)
     })
   }
-  // 不是图片就是文字，让其冒泡以便被有道云笔记中的脚本捕获的事件
 }
 
 

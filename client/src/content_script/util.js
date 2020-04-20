@@ -2,8 +2,8 @@ import { AltText, domain } from './config.js'
 
 const query = (str) => document.querySelector(str);
 
-// 生成图片的url
-const generateUrl = (Fname) => `![${AltText}](${domain}/${Fname})`;
+// 生成显示图片的markdown写法
+const generateMDUrl = (Fname) => `![${AltText}](${domain}/${Fname})`;
 
 // 生成图片name
 const  generateFName = () => window.btoa(Date.now()) + Math.random().toString(36).substr(2);// 再加上时间戳base64转码
@@ -20,7 +20,7 @@ const pasteEvent = (el, str) => {
   el.dispatchEvent(event);
 }
 
-export { query, generateFName, generateUrl, pasteEvent }
+export { query, generateFName, generateMDUrl, pasteEvent }
 
 
 // // 构造paste事件
