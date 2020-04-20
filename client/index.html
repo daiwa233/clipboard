@@ -18,7 +18,7 @@
         min-height: 300px;
         max-width: 400px;
         padding: 20px;
-        margin: 50px auto 0; 
+        margin: 0 auto; 
         box-shadow: 0 4px 8px 6px rgba(7,17,27,.06);
       }
       form{
@@ -31,6 +31,7 @@
       .bg-danger{
         padding: 10px;
         font-size: 12px;
+        border-radius: 2px;
       }
       .center{
         text-align: center;
@@ -62,11 +63,19 @@
         top: 10px;
         cursor: pointer; 
       }
+      .view-title{
+        position: fixed;
+        left: 50%;
+        top:10px;
+        transform: translateX(-50%);
+      }
     </style>
 </head>
 
 <body>
-  <div id="app"></div>
+  <div id="app">
+    
+  </div>
   </div>
   <template id="home">
     <div class="wrapper">
@@ -87,11 +96,11 @@
         <p class="hidden bg-danger" id="message"></p>
         <div class="form-group">
           <label for="access">accessKey</label>
-          <input type="password" class="form-control" id="access" placeholder="accessKey">
+          <input type="password" autocomplete="false" class="form-control" id="access" placeholder="accessKey">
         </div>
         <div class="form-group">
           <label for="secret">secretKey</label>
-          <input type="password" class="form-control" id="secret" placeholder="secretKey">
+          <input type="password" autocomplete="false" class="form-control" id="secret" placeholder="secretKey">
         </div>
         <div class="form-group">
           <label for="domain">域名</label>
@@ -129,8 +138,42 @@
   </template>
 
   <template id="config-view">
-    <div>
-      
+    <div class="wrapper">
+      <div id="back" class="btn-link">
+        <span class="glyphicon glyphicon-menu-left"></span>
+        <span>返回</span>
+      </div>
+      <div class="view-title">
+        <h4>配置</h4>
+      </div>   
+      <form>
+        <div class="form-group">
+          <label for="AltText" class="control-label">图片失效时显示的文字：</label>
+            <input type="email" class="form-control" id="AltText" placeholder="">
+        </div>
+        <div class="form-group">
+          <label for="iframeID" class="control-label">有道云md页面元素的ID：</label>
+            <input type="text" class="form-control" id="iframeID" placeholder="">
+        </div>
+        <div class="form-group">
+          <label for="domain" class="control-label">图片链接的拼接域名：</label>
+            <input type="text" class="form-control" id="domain" placeholder="">
+        </div>
+        <div class="form-group">
+          <label for="uploadImpl" class="control-label">上传服务器的url地址：</label>
+            <input type="text" class="form-control" id="uploadImpl" placeholder="">
+        </div>
+        <div class="form-group">
+          <div class="center">
+            <button type="submit" id="submit" class="btn btn-default">提交更改</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </template>
+  <template id="error-view">
+    <div class="wrapper">
+      <p id="error-view-msg" class="bg-danger"></p>
     </div>
   </template>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
