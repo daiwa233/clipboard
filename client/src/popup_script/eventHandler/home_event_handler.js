@@ -8,11 +8,11 @@ import { query, publish } from '../util.js'
 export function init() {
   const zoneGroup = query('#zone-group');
 
-zoneGroup.addEventListener('click', function(e) {
-  const { target } = e;
-  let type = target.getAttribute('data-type');
-  
-  // 发布事件， 通知另一个模块改变视图
-  publish('chooseType', {detail: type});
-})
+  zoneGroup.addEventListener('click', function(e) {
+    const { target } = e;
+    let type = target.getAttribute('data-type');
+    
+    // 发布事件， 通知另一个模块改变视图
+    publish('chooseType', {detail: type});
+  })
 }
