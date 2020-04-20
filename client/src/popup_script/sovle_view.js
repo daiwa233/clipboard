@@ -1,9 +1,7 @@
-import { info, work, home } from './view.js'
+import { info, work, home, error, config } from './view.js'
 // 首先先请求接口判断是否已经初始化过了
 
 axios.defaults.withCredentials = true;
-
-
 
 function homeToinfo() {
   // 通过浏览器的构造事件的api，实现了一个简单的发布订阅模式。
@@ -26,13 +24,21 @@ function toWork() {
     work(detail);
   })
 }
+function toConfig() {
+  document.body.addEventListener('toConfig', function() {
+    config()
+  })
+}
 
 async function initView() {
-  const resData = await axios
-  .get('http://localhost:3001/isInitial')
-  .catch(err => {
-    console.log(err)
-  });
+  let resData;
+  try{
+    resData = await axios
+    .get('http://localhost:3001/isInitial');
+  } catch {
+    error('服务器未开启或者其它原因导致请求失败');
+    return;
+  }
   const { status, type } = resData.data;
   if (status == '200') {
     // 已经初始化
@@ -46,5 +52,6 @@ async function initView() {
   homeToinfo();
   backToHome();
   toWork();
+  toConfig();
 }
 export { initView }
