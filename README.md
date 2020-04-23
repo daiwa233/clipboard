@@ -9,3 +9,7 @@
 后续工作：
 
 完善功能以及部署在服务器
+
+[ ] 抽离配置项,存储在Chrome扩展的storage中
+
+[ ] content script 使用storage中的配置项，且出错时时调用ChromeAPI通过popup提示错误
