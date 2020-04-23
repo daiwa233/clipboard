@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[4],{4:function(n,c,t){"use strict";t.r(c),t.d(c,"init",(function(){return i}));var e=t(0);function i(){let n=Object(e.d)("#change-btn"),c=Object(e.d)("#config-btn");n.addEventListener("click",(function(){Object(e.c)("backToHome")})),c.addEventListener("click",(function(){Object(e.c)("toConfig")}))}}}]);

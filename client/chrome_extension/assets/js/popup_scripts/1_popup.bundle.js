@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[1],{5:function(n,t,e){"use strict";e.r(t),e.d(t,"init",(function(){return c}));var i=e(0);function c(){let n=Object(i.d)("#back"),t=Object(i.d)("#submit");n.addEventListener("click",(function(n){Object(i.c)("toWork",{detail:"qiniu"})})),t.addEventListener("click",(function(n){n.preventDefault()}))}}}]);
