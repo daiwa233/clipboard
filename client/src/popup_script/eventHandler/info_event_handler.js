@@ -3,7 +3,9 @@ import {
   query,
   showMessage,
   hideMessage,
-  publish
+  publish,
+  saveConfig,
+  uploadImpl
 } from '../util.js'
 
 let messageFlag = false;
@@ -27,7 +29,7 @@ export function QiniuInit() {
       showMessage(messageEl, '请完整填写表单');
       return;
     }
-    axios.post('http://localhost:3001/initzone', {
+    axios.post(`${uploadImpl}/initzone`, {
       type,
       accessKey: access.value,
       secretKey: secret.value,
@@ -44,12 +46,13 @@ export function QiniuInit() {
       } else if (status == '402') {
         showMessage(messageEl, '缺少配置项')
       } else if (status == '200') {
-        // 配置成功的话将一些配置项添加到localStorage
-        localStorage.setItem('clipboardData', {
+        // 配置成功的话将一些配置项添加到storage
+        saveConfig({
           AltText: 'image',
           domain: domain.value,
-          iframeID: 'mdEditor'
-        });
+          iframeID: 'mdEditor',
+          uploadImpl
+        })
         publish('toWork', {detail: type})
       } else {
         showMessage(messageEl, '配置项错误')

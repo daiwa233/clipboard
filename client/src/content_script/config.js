@@ -13,14 +13,34 @@
  * 3. 
  */
 
-// 其实应该调用Chrome的storageAPI来获得popup脚本存储的配置
-// 而不是localStorage
-let data = JSON.parse(localStorage.getItem('clipboardData')) || {
-	AltText: 'image',
-	domain: 'http://img.start-here.cn',
-	iframeID: 'mdEditor',
-	uploadImpl: 'http://localhost:3001'
-};
-const { AltText, domain, iframeID } = data;
+let item = localStorage.getItem('clipboardData');
 
-export { AltText, domain, iframeID, uploadImpl }
+let data = JSON.parse(item) || {
+			AltText: 'image',
+			domain: '',
+			iframeID: 'mdEditor',
+			uploadImpl: 'http://localhost:3001',
+			notInit: true
+		},
+	isInit = false;
+
+	// 监听storage改变的事件
+chrome.storage.onChanged.addListener(function (changes) {
+
+	let { clipboardData } = changes;
+	console.log(changes)
+	// null 也可以被JSON.parse parse，不会报错，所以此处typeof === 'object'即可
+	if (clipboardData && typeof clipboardData.newValue === 'object') {
+		
+		localStorage.setItem('clipboardData', JSON.stringify(clipboardData.newValue));
+	}
+	if (clipboardData && clipboardData.oldValue && !clipboardData.newValue) {
+		localStorage.removeItem('clipboardData'); // 当清空storage时，删除localStorage中的内容。
+	}
+});
+
+const { AltText, domain, iframeID, uploadImpl, notInit } = data;
+
+if (!notInit) isInit = true;
+
+export { AltText, domain, iframeID, uploadImpl, isInit }

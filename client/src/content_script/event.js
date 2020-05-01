@@ -63,16 +63,22 @@ function pasteHandler(e) {
 
 
 export function initEvent() {
-  const iframeEl = query(`#${iframeID}`).contentWindow
-  mainEl = iframeEl.document.querySelector('textarea');
-
-  mainEl.addEventListener('focus', function(e) {
-    focusFlag = true
-  })
-  mainEl.addEventListener('blur', function(e) {
-    focusFlag = false
-  })
-  mainEl.addEventListener('paste', pasteHandler)
+  const iframeEl = query(`#${iframeID}`).contentWindow;
+  if (iframeEl) {
+    mainEl = iframeEl.document.querySelector('textarea');
+  }
+  if (mainEl) {
+    mainEl.addEventListener('focus', function(e) {
+      focusFlag = true;
+    });
+    mainEl.addEventListener('blur', function(e) {
+      focusFlag = false;
+    });
+    mainEl.addEventListener('paste', pasteHandler);
+  } else {
+    // 其实在请求接口上报就更好了 hh
+    console.log('没能找到粘贴事件的textarea');
+  }
 
 }
 

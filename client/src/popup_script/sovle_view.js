@@ -1,6 +1,7 @@
 import { info, work, home, error, config } from './view.js'
-// 首先先请求接口判断是否已经初始化过了
-
+import {
+  uploadImpl
+} from './util.js'
 axios.defaults.withCredentials = true;
 
 function homeToinfo() {
@@ -33,8 +34,9 @@ function toConfig() {
 async function initView() {
   let resData;
   try{
+    // 首先先请求接口判断是否已经初始化过了
     resData = await axios
-    .get('http://localhost:3001/isInitial');
+    .get(`${uploadImpl}/isInitial`);
   } catch {
     error('服务器未开启或者其它原因导致请求失败');
     return;
@@ -45,8 +47,9 @@ async function initView() {
     work(type);
     
   } else if ( status == '301') {
-    // 没有初始化
+    chrome.storage.sync.clear();// 未初始化时，删除存储中的内容
     home();
+    
   }
   // 订阅用户选择类型的事件，改变视图
   homeToinfo();
